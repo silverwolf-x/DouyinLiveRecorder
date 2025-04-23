@@ -28,7 +28,7 @@ find "$TARGET_DIR" -type f -name '*.ts' | while read -r ts_file; do
   start_time=$(date +%s)
 
   # 执行压缩
-  ffmpeg -i "$ts_file" -vcodec libx264 -crf $CRF -preset fast -acodec aac "$mp4_file" -y
+  ffmpeg -i "$ts_file" -vcodec libx265 -crf $CRF -preset fast -acodec aac "$mp4_file" -y
 
   # 记录压缩结束时间
   end_time=$(date +%s)
