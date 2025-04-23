@@ -1,9 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
 
 jobs:
   build_and_push:
@@ -41,8 +39,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          ihmily/douyin-live-recorder:${{ github.ref_name }} 
-          ihmily/douyin-live-recorder:latest
+          silverwolfx/douyin-live-recorder:${{ github.ref_name }} 
+          silverwolfx/douyin-live-recorder:latest
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
