@@ -31,7 +31,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
         registry: docker.io
-
+    - name: Get current date
+      id: date
+      run: echo "DATE=$(date +'%Y%m%d')" >> "$GITHUB_OUTPUT"
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
@@ -39,8 +41,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          silverwolfx/douyin-live-recorder:${{ github.ref_name }} 
+          silverwolfx/douyin-live-recorder:${{ steps.date.outputs.DATE }} 
           silverwolfx/douyin-live-recorder:latest
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/amd64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
